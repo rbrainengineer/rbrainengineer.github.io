@@ -84,13 +84,17 @@
             if (findPairs(markers) >= 1){
                 hasPair = 1;
                 correctAudio.play();
+                context.fillStyle = "green";
+                context.fillRect(0, 0, canvas.width, canvas.height);
             }
             else {
                 incorrectAudio.play()
+                context.fillStyle = "red";
+                context.fillRect(0, 0, canvas.width, canvas.height);
             }
         }
-        drawCorners(markers, hasPair);
         // drawId(markers);
+        // drawCorners(markers, hasPair);
       }
     }
 
@@ -123,9 +127,7 @@
 
         context.stroke();
         context.closePath();
-        
-        context.strokeStyle = "green";
-        context.strokeRect(corners[0].x - 2, corners[0].y - 2, 4, 4);
+
       }
     }
 
