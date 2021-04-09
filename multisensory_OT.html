@@ -9,7 +9,7 @@
   <script type="text/javascript" src="aruco.js"></script> 
 
   <script>
-    var video, canvas, context, imageData, detector, correctAudio, incorrectAudio;
+    var video, canvas, context, imageData, detector, sweetAudio, bitterAudio, counter1, counter2;
   
     function onLoad(){
       video = document.getElementById("video");
@@ -19,7 +19,8 @@
       bitterAudio = new Audio("bitter.mp3");
       canvas.width = parseInt(canvas.style.width);
       canvas.height = parseInt(canvas.style.height);
-      
+      counter1 = 0;
+      counter2 = 0;
       if (navigator.mediaDevices === undefined) {
         navigator.mediaDevices = {};
       }
@@ -82,13 +83,19 @@
         if (markers.length >= 1){
             if (markers[0].id == 9){
                 hasPair = 1;
-                sweetAudio.play();
+                if (sweetAudio.ended || counter1 ==0 ){
+                    sweetAudio.play();
+                    counter1 ++;
+                }
                 context.fillStyle = "pink";
                 context.fillRect(0, 0, canvas.width, canvas.height);
             }
             else if (markers[0].id == 10){
                 hasPair = 1;
-                bitterAudio.play();
+                if (bitterAudio.ended|| counter2 ==0 ){
+                    bitterAudio.play();
+                    counter2 ++;
+                }
                 context.fillStyle = "#654321";
                 context.fillRect(0, 0, canvas.width, canvas.height);
             }
